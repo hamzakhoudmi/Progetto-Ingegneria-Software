@@ -1,0 +1,28 @@
+@startuml
+
+'Attori
+actor Utente
+
+'Sistema
+rectangle Catalogo {
+    usecase interfaccia as i0
+    usecase "cerca un film" as i1
+    usecase "ordina i film" as i2
+    usecase "inserisci film" as i3
+    usecase "modifica film" as i4
+    usecase "elimina film" as i5
+    usecase "aggiorna collezione" as i6
+}
+
+'Relazioni
+Utente --> i0
+i0 --> i1
+i0 --> i2
+i0 --> i3
+i0 --> i4
+i0 --> i5
+i3 ..> i6 : <<include>>
+i4 ..> i6 : <<include>>
+i5 ..> i6 : <<include>>
+
+@enduml

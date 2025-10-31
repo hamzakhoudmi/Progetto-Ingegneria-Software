@@ -1,0 +1,44 @@
+@startuml
+
+class Film {
+    -titolo: String
+    -regista: String
+    -anno: int
+    -genere: String
+    -voto: int
+    -stato: String
+
+    -set()
+    +getTitolo()
+    +getRegista()
+    +getAnno()
+    +getGenere()
+    +getVoto()
+    +getStato()
+}
+
+interface Collezione {
+    +aggiungi()
+    +modifica()
+    +rimuovi()
+    +cerca()
+    +ordina()
+    +salva()
+}
+
+class CollezioneConcreta {
+    -lista: List<Film>
+    +aggiungi()
+    +modifica()
+    +rimuovi()
+    +cerca()
+    +ordina()
+    +salva()
+}
+
+Collezione <|.. CollezioneConcreta
+CollezioneConcreta *-- Film
+
+left to right direction
+
+@enduml
