@@ -6,15 +6,9 @@ class Film {
     -anno: int
     -genere: String
     -voto: int
-    -stato: String
-
-    -set()
-    +getTitolo()
-    +getRegista()
-    +getAnno()
-    +getGenere()
-    +getVoto()
-    +getStato()
+    -stato: Stato
+    (nota: tutti gli attributi
+    hanno getter e setter)
 }
 
 interface Collezione {
@@ -26,7 +20,7 @@ interface Collezione {
     +salva()
 }
 
-class CollezioneConcreta {
+class CollezioneSingleton {
     -lista: List<Film>
     +aggiungi()
     +modifica()
@@ -36,8 +30,8 @@ class CollezioneConcreta {
     +salva()
 }
 
-Collezione <|.. CollezioneConcreta
-CollezioneConcreta *-- Film
+Collezione <|.. CollezioneSingleton
+CollezioneSingleton *-- Film
 
 left to right direction
 
