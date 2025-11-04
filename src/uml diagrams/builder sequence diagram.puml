@@ -1,0 +1,17 @@
+@startuml
+
+participant "Utente" as U
+participant "ConcreteBuilder" as CB
+participant "Film" as F
+
+U -> CB : new ConcreteBuilder( titolo, regista )
+U -> CB : genere
+CB -> F : setGenere
+U -> CB : anno
+CB -> F : setAnno
+
+U -> CB : build()
+CB -> F : create Film
+CB -> U : return Film
+
+@enduml

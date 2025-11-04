@@ -1,0 +1,20 @@
+@startuml
+
+class CollezioneSingleton {
+    -CATALOGO : CollezioneSingleton
+    -films : List<Film>
+    +getFilms()
+    +add()
+    +remove()
+    +creaIteratore()
+}
+
+note right of CollezioneSingleton::getFilms
+    return films;
+   end note
+
+note right of CollezioneSingleton::creaIteratore
+    return new IteratoreConcreto();
+   end note
+
+@enduml

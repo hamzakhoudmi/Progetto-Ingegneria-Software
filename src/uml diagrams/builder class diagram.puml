@@ -1,0 +1,42 @@
+@startuml
+
+class Utente <<entity>>
+class Film
+
+interface Builder <<interface>> {
+    +genere()
+    +stato()
+    +anno()
+    +voto()
+    +build()
+}
+
+class ConcreteBuilder {
+    -titolo
+    -regista
+    -genere
+    -stato
+    -anno
+    -voto
+
+    +genere()
+    +stato()
+    +anno()
+    +voto()
+    +build()
+}
+
+'Relazioni
+Utente -right-> Film : <<uses>>
+Utente --> Builder : <<uses>>
+ConcreteBuilder ..> Builder
+ConcreteBuilder --> Film : <<creates>>
+
+'posizione grafica
+skinparam linetype ortho
+top to bottom direction
+Utente -[hidden]down-> Builder
+Builder -[hidden]down-> ConcreteBuilder
+ConcreteBuilder -[hidden]right-> Film
+
+@enduml

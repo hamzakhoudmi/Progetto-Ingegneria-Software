@@ -1,4 +1,5 @@
 package dominio;
+import java.util.*;
 
 public class Film {
 
@@ -34,7 +35,17 @@ public class Film {
     public void setGenere( String g ) { genere = g; }
     public void setStato( Stato s ) { stato = s; }
     public void setAnno( int a ) { anno = a; }
-    public void setVoto( int v ) { voto = v; }
+    public void setVoto( int v ) {
+        if( v<0 || v>10 ) throw new IllegalArgumentException( "Voto non ammissibile." );
+        voto = v;
+    }
+
+    //il builder potrebbe ricreare diversamente lo stesso film, questo metodo valuta la somiglianza di due film
+    public boolean same( Film f ) {
+        if( f==null ) return false;
+        return Objects.equals( titolo, f.titolo )
+                && Objects.equals( regista, f.regista );
+    }//same
 
     public String toString() {
         return "[ " + titolo + ", " + regista + ", " + genere + ", " + stato + ", "
@@ -64,6 +75,7 @@ public class Film {
             return this;
         }
         public Builder voto( int v2 ) {
+            if( v2<0 || v2>10 ) throw new IllegalArgumentException( "Voto non ammissibile." );
             v1 = v2;
             return this;
         }

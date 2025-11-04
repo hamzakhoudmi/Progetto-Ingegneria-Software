@@ -1,0 +1,40 @@
+@startuml
+
+interface Collezione <<interface>> {
+    +creaIteratore(): Iteratore
+}
+
+interface Iteratore <<interface>> {
+    +hasNext()
+    +currentItem()
+    +next()
+    +remove()
+}
+
+class CollezioneSingleton {
+    +creaIteratore(): Iteratore
+}
+
+class IteratoreConcreto {
+    +hasNext()
+    +currentItem()
+    +next()
+    +remove()
+}
+
+'Relazioni
+CollezioneSingleton ..> Collezione
+IteratoreConcreto ..> Iteratore
+Collezione --> Iteratore
+CollezioneSingleton o-- IteratoreConcreto
+IteratoreConcreto --> CollezioneSingleton
+
+'posizione grafica
+skinparam linetype ortho
+top to bottom direction
+Collezione -[hidden]down-> CollezioneSingleton
+Iteratore -[hidden]down-> IteratoreConcreto
+Iteratore -[hidden]right-> Collezione
+IteratoreConcreto -[hidden]right-> CollezioneSingleton
+
+@enduml
