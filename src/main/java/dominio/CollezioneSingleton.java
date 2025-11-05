@@ -1,14 +1,24 @@
 package dominio;
 import java.util.*;
+import applicazione.strategy.sort.*;
+import applicazione.strategy.ricerca.*;
+import applicazione.strategy.filter.*;
 
 public enum CollezioneSingleton implements Collezione {
     CATALOGO;
     private List<Film> films = new ArrayList<>();
-    private int modCounter = 0;      //gestisce i conflitti di scansione aumentando la consistenza
-    //private Strategy strategia;
+    private List<Film> filterFilms = new ArrayList<>();
+    private int modCounter = 0;                      //gestisce i conflitti di scansione aumentando la consistenza
+    private SortStrategy ordina;
+    private RicercaStrategy ricerca;
+    private FilterStrategy filtro;
 
     public List<Film> getFilms() { return films; }
-    //public void setStrategy( Strategy s ) {}
+
+    //settaggio strategie
+    public void setSortStrategy( SortStrategy s ) { ordina = s; }
+    public void setRicercaStrategy( RicercaStrategy s ) { ricerca = s; }
+    public void setFilterStrategy( FilterStrategy s ) { filtro = s; }
 
     public void add( Film f ) {
         for( Film f1: films )
@@ -29,6 +39,47 @@ public enum CollezioneSingleton implements Collezione {
             }
         return null;
     }//remove
+
+    public void sort() {
+        if( ordina!=null )
+            Collections.sort( films, ordina );
+        else
+            Collections.sort( films );
+    }//sort
+
+    public List<Film> filtra() {
+        if( filtro==null ) {
+            System.out.println( "Nessun filtro." );
+            return Collections.emptyList();         //ritorno una lista vuota
+        }
+        if( filterFilms.isEmpty() )
+            for( Film f : films )
+                if( filtro.include( f ) )
+                    filterFilms.add( f );
+        else {
+            Iterator<Film> it = filterFilms.iterator();
+            Film fi;
+            while( it.hasNext() ) {
+                fi = it.next();
+                if( !filtro.include( fi ) )
+                    it.remove();
+            }
+        }
+        return new ArrayList<>( filterFilms );     //ritorno una copia, per evitare manipolazioni esterne sulla lista privata
+    }//filtra
+    public void annullaFiltri() { filterFilms.clear(); }
+
+    public List<Film> search() {
+        if( ricerca==null ) {
+            System.out.println( "Seleziona prima un criterio di ricerca." );
+            return Collections.emptyList();
+        }
+        List<Film> filmcercati = new ArrayList<>();
+        for( Film f : films )
+            if( ricerca.accept( f ) )
+                filmcercati.add( f );
+        return filmcercati;
+    }//search
 
     public Iteratore<Film> creaIteratore() {
         return new IteratoreConcreto();
@@ -63,6 +114,7 @@ public enum CollezioneSingleton implements Collezione {
             if( !flag )
                 throw new IllegalStateException( "Nessun elemento corrente, chiama prima next()." );
             Film f = films.remove( current );
+            modCounterMirror++; modCounter++;
             current--;
             flag = false;
             return f;
@@ -71,4 +123,4 @@ public enum CollezioneSingleton implements Collezione {
 
 }//CollezioneSingleton
 
-//metodi: ricerca() filter() sort() salva()
+//metodi: salva()

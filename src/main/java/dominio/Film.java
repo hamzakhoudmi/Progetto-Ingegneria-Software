@@ -1,7 +1,7 @@
 package dominio;
 import java.util.*;
 
-public class Film {
+public class Film implements Comparable<Film> {
 
     //campi obbligatori
     private String titolo;
@@ -40,12 +40,20 @@ public class Film {
         voto = v;
     }
 
-    //il builder potrebbe ricreare diversamente lo stesso film, questo metodo valuta la somiglianza di due film
+    //il builder potrebbe ricreare diversamente lo stesso film, questo metodo valuta la somiglianza tra due film
     public boolean same( Film f ) {
         if( f==null ) return false;
         return Objects.equals( titolo, f.titolo )
                 && Objects.equals( regista, f.regista );
     }//same
+
+    //ordinamento di default: per titolo e se stesso titolo allora per regista
+    public int compareTo( Film f ) {
+        int c = titolo.compareTo( f.getTitolo() );
+        if( c==0 )
+            c = regista.compareTo( f.getRegista() );
+        return c;
+    }//compareto
 
     public String toString() {
         return "[ " + titolo + ", " + regista + ", " + genere + ", " + stato + ", "
