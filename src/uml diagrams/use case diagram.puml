@@ -7,6 +7,7 @@ actor Utente
 rectangle Catalogo {
     usecase interfaccia as i0
     usecase "cerca un film" as i1
+    usecase "applica filtri" as i11
     usecase "ordina i film" as i2
     usecase "inserisci film" as i3
     usecase "modifica film" as i4
@@ -17,6 +18,7 @@ rectangle Catalogo {
 'Relazioni
 Utente --> i0
 i0 --> i1
+i0 --> i11
 i0 --> i2
 i0 --> i3
 i0 --> i4

@@ -9,11 +9,13 @@ public enum CollezioneSingleton implements Collezione {
     private List<Film> films = new ArrayList<>();
     private List<Film> filterFilms = new ArrayList<>();
     private int modCounter = 0;                      //gestisce i conflitti di scansione aumentando la consistenza
+    private int size;
     private SortStrategy ordina;
     private RicercaStrategy ricerca;
     private FilterStrategy filtro;
 
-    public List<Film> getFilms() { return films; }
+    public int size() { return size; }
+    public boolean isEmpty() { return size==0; }
 
     //settaggio strategie
     public void setSortStrategy( SortStrategy s ) { ordina = s; }
@@ -26,19 +28,23 @@ public enum CollezioneSingleton implements Collezione {
                 System.out.println( "Il film è già presente." );
                 return;
             }
-        films.add(f);
-        modCounter++;
+        films.add( f );
+        size++; modCounter++;
     }//add
     public Film remove( Film f ) {
         for( Film f1 : films )
             if( f.same( f1 ) ) {
                 f = f1;
                 films.remove( f1 );
-                modCounter++;
+                size--; modCounter++;
                 return f;
             }
         return null;
     }//remove
+    public void clear() {
+        for( Film f : films )
+            remove( f );
+    }//clear
 
     public void sort() {
         if( ordina!=null )
@@ -52,11 +58,11 @@ public enum CollezioneSingleton implements Collezione {
             System.out.println( "Nessun filtro." );
             return Collections.emptyList();         //ritorno una lista vuota
         }
-        if( filterFilms.isEmpty() )
-            for( Film f : films )
-                if( filtro.include( f ) )
-                    filterFilms.add( f );
-        else {
+        if( filterFilms.isEmpty() ) {
+            for (Film f : films)
+                if (filtro.include(f))
+                    filterFilms.add(f);
+        } else {
             Iterator<Film> it = filterFilms.iterator();
             Film fi;
             while( it.hasNext() ) {
@@ -116,6 +122,7 @@ public enum CollezioneSingleton implements Collezione {
             Film f = films.remove( current );
             modCounterMirror++; modCounter++;
             current--;
+            size--;
             flag = false;
             return f;
         }//remove

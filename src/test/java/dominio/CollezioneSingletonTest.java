@@ -11,7 +11,7 @@ public class CollezioneSingletonTest {
     @BeforeEach
     void setUp() {
         catalogo = CollezioneSingleton.CATALOGO;
-        catalogo.getFilms().clear();  //elimino le vecchie modifiche
+        catalogo.clear();  //elimino le vecchie modifiche
         f1 = new Film.ConcreteBuilder( "Inception", "Nolan" ).anno(2010).build();
         f2 = new Film.ConcreteBuilder( "Interstellar", "Nolan" ).anno(2014).build();
     }
@@ -26,13 +26,16 @@ public class CollezioneSingletonTest {
     void testAddFilmDuplicato() {
         catalogo.add( f1 );
         catalogo.add( f1 );
-        assertEquals( 1, catalogo.getFilms().size(), "oggetti duplicati");
+        assertEquals( 1, catalogo.size(), "oggetti duplicati");
     }
     @Test
     void TestAddFilm() {
         catalogo.add( f1 );
-        assertEquals( 1, catalogo.getFilms().size() );
-        assertEquals( "Inception", catalogo.getFilms().get(0).getTitolo() );
+        assertEquals( 1, catalogo.size() );
+        Iteratore<Film> it = catalogo.creaIteratore();
+        assertTrue( it.hasNext() );
+        it.next();
+        assertEquals( "Inception", it.currentItem().getTitolo() );
     }
 
     @Test
@@ -40,7 +43,7 @@ public class CollezioneSingletonTest {
         catalogo.add( f1 );
         Film f = catalogo.remove( f1 );
         assertEquals( f1, f );
-        assertTrue( catalogo.getFilms().isEmpty(), "elemento non rimosso" );
+        assertTrue( catalogo.isEmpty(), "elemento non rimosso" );
     }
 
     @Test

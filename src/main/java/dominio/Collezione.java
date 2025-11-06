@@ -1,16 +1,26 @@
 package dominio;
 import java.util.*;
+import applicazione.strategy.sort.*;
+import applicazione.strategy.ricerca.*;
+import applicazione.strategy.filter.*;
 
 interface Collezione {
 
-    List<Film> getFilms();
-
     void add( Film f );
     Film remove( Film f );
-    //void setStrategy( Strategy s );
-    //ricerca();
-    //filter();
-    //sort();
+    int size();
+    boolean isEmpty();
+    void clear();
+
+    void setSortStrategy( SortStrategy s );
+    void setRicercaStrategy( RicercaStrategy s );
+    void setFilterStrategy( FilterStrategy s );
+
+    void sort();
+    List<Film> filtra();
+    void annullaFiltri();
+    List<Film> search();
+
     //salva();
 
     Iteratore<Film> creaIteratore();
