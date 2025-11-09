@@ -20,7 +20,22 @@ public class Film implements Comparable<Film> {
         anno = b.a1;
         voto = b.v1;
     }//costruttore
-    public enum Stato { DA_VEDERE, IN_VISIONE, VISTO }
+    public Film() {}
+
+    public enum Stato {
+        DA_VEDERE, IN_VISIONE, VISTO;
+
+        public static Stato convert( String s ) {
+            if( s.equalsIgnoreCase( "DA_VEDERE" ) )
+                return Stato.DA_VEDERE;
+            if( s.equalsIgnoreCase( "IN_VISIONE" ) )
+                return Stato.IN_VISIONE;
+            if( s.equalsIgnoreCase( "VISTO" ) )
+                return Stato.VISTO;
+            throw new IllegalArgumentException( "Stato non idoneo." );
+        }
+
+    }
 
     //getter
     public String getTitolo() { return titolo; }
@@ -49,9 +64,9 @@ public class Film implements Comparable<Film> {
 
     //ordinamento di default: per titolo e se stesso titolo allora per regista
     public int compareTo( Film f ) {
-        int c = titolo.compareTo( f.getTitolo() );
+        int c = titolo.compareToIgnoreCase( f.getTitolo() );
         if( c==0 )
-            c = regista.compareTo( f.getRegista() );
+            c = regista.compareToIgnoreCase( f.getRegista() );
         return c;
     }//compareto
 

@@ -44,4 +44,11 @@ public class FilmTest {
         assertEquals( 2015, f.getAnno() );
         assertEquals( 8, f.getVoto() );
     }
+
+    @Test
+    void testSame() {
+        Film f1 = new Film.ConcreteBuilder( "Titolo1", "Regista1" ).build();
+        Film f2 = new Film.ConcreteBuilder( "Titolo1", "Regista2" ).build();
+        assertFalse( f1.same( f2 ), "i due film sono gli stessi" );
+    }
 }

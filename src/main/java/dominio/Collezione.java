@@ -4,7 +4,7 @@ import applicazione.strategy.sort.*;
 import applicazione.strategy.ricerca.*;
 import applicazione.strategy.filter.*;
 
-interface Collezione {
+public interface Collezione {
 
     void add( Film f );
     Film remove( Film f );
@@ -21,7 +21,7 @@ interface Collezione {
     void annullaFiltri();
     List<Film> search();
 
-    //salva();
+    void salva();
 
     Iteratore<Film> creaIteratore();
 

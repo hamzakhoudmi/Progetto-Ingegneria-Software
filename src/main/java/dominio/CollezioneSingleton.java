@@ -3,6 +3,9 @@ import java.util.*;
 import applicazione.strategy.sort.*;
 import applicazione.strategy.ricerca.*;
 import applicazione.strategy.filter.*;
+import infrastruttura.*;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 public enum CollezioneSingleton implements Collezione {
     CATALOGO;
@@ -13,6 +16,14 @@ public enum CollezioneSingleton implements Collezione {
     private SortStrategy ordina;
     private RicercaStrategy ricerca;
     private FilterStrategy filtro;
+    private Persister persister;
+
+    private CollezioneSingleton() {
+        persister = new JsonPersister("collezionesingleton.json");
+        Type tipoListaFilm = new TypeToken<List<Film>>() {}.getType();
+        List<Film> caricata = persister.carica(tipoListaFilm);
+        films = (caricata != null) ? caricata : new ArrayList<>();
+    }
 
     public int size() { return size; }
     public boolean isEmpty() { return size==0; }
@@ -30,6 +41,7 @@ public enum CollezioneSingleton implements Collezione {
             }
         films.add( f );
         size++; modCounter++;
+        salva();
     }//add
     public Film remove( Film f ) {
         for( Film f1 : films )
@@ -37,13 +49,17 @@ public enum CollezioneSingleton implements Collezione {
                 f = f1;
                 films.remove( f1 );
                 size--; modCounter++;
+                salva();
                 return f;
             }
         return null;
     }//remove
     public void clear() {
-        for( Film f : films )
-            remove( f );
+        films.clear();
+        filterFilms.clear();
+        size = 0;
+        modCounter++;
+        salva();
     }//clear
 
     public void sort() {
@@ -81,11 +97,21 @@ public enum CollezioneSingleton implements Collezione {
             return Collections.emptyList();
         }
         List<Film> filmcercati = new ArrayList<>();
-        for( Film f : films )
-            if( ricerca.accept( f ) )
-                filmcercati.add( f );
+        if( !filterFilms.isEmpty() ) {
+            for( Film f : filterFilms )
+                if( ricerca.accept( f ) )
+                    filmcercati.add( f );
+        } else {
+            for( Film f : films )
+                if( ricerca.accept( f ) )
+                    filmcercati.add( f );
+        }
         return filmcercati;
     }//search
+
+    public void salva() {
+        persister.salva( films );
+    }//salva
 
     public Iteratore<Film> creaIteratore() {
         return new IteratoreConcreto();
@@ -130,4 +156,3 @@ public enum CollezioneSingleton implements Collezione {
 
 }//CollezioneSingleton
 
-//metodi: salva()
