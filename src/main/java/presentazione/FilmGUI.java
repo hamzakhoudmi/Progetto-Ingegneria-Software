@@ -32,7 +32,7 @@ public class FilmGUI extends JFrame {
     }
 
     private void initGUI() {
-        setTitle("Gestione Film");
+        setTitle("Catalogo Film");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         setSize(600, 400);

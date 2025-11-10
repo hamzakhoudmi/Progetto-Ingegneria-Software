@@ -1,0 +1,74 @@
+@startuml
+
+interface Collezione <<interface>>
+class CollezioneSingleton
+
+interface FilterStrategy <<interface>> {
+    +include(film)
+}
+interface RicercaStrategy <<interface>> {
+    +accept(film)
+}
+interface SortStrategy <<interface>>
+
+class FilterByGenere {
+    -genere : String
+    +FilterByGenere(genere)
+    +include(film)
+}
+class FilterByStato {
+    -stato : Stato
+    +FilterByStato(stato)
+    +include(film)
+}
+
+class RicercaByRegista {
+    -regista : String
+    +RicercaByRegista(regista)
+    +accept(film)
+}
+class RicercaByTitolo {
+    -titolo : String
+    +RicercaByTitolo(titolo)
+    +accept(film)
+}
+
+class SortByAnno {
+    +compare(film1, film2)
+}
+class SortByTitolo {
+    +compare(film1, film2)
+}
+class SortByVoto {
+    +compare(film1, film2)
+}
+
+'Relazioni
+CollezioneSingleton ..> Collezione
+CollezioneSingleton o-- FilterStrategy
+CollezioneSingleton o-- RicercaStrategy
+CollezioneSingleton o-- SortStrategy
+Collezione --> FilterStrategy : <<uses>>
+Collezione --> RicercaStrategy : <<uses>>
+Collezione --> SortStrategy : <<uses>>
+FilterByGenere ..> FilterStrategy
+FilterByStato ..> FilterStrategy
+RicercaByRegista ..> RicercaStrategy
+RicercaByTitolo ..> RicercaStrategy
+SortByAnno ..> SortStrategy
+SortByTitolo ..> SortStrategy
+SortByVoto ..> SortStrategy
+
+'posizione grafica
+skinparam linetype ortho
+top to bottom direction
+Collezione -[hidden]down-> CollezioneSingleton
+FilterStrategy -[hidden]down-> FilterByGenere
+FilterStrategy -[hidden]down-> FilterByStato
+RicercaStrategy -[hidden]down-> RicercaByRegista
+RicercaStrategy -[hidden]down-> RicercaByTitolo
+SortStrategy -[hidden]down-> SortByAnno
+SortStrategy -[hidden]down-> SortByTitolo
+SortStrategy -[hidden]down-> SortByVoto
+
+@enduml

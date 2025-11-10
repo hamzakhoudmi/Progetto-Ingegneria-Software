@@ -33,9 +33,8 @@ public class Film implements Comparable<Film> {
             if( s.equalsIgnoreCase( "VISTO" ) )
                 return Stato.VISTO;
             throw new IllegalArgumentException( "Stato non idoneo." );
-        }
-
-    }
+        }//convert
+    }//Stato
 
     //getter
     public String getTitolo() { return titolo; }

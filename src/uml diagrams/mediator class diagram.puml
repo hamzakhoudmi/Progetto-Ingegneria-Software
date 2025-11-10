@@ -1,0 +1,43 @@
+@startuml
+
+interface Collezione
+
+interface Mediator <<interface>> {
+    +search();
+    +filtra();
+    +sort();
+    +aggiungi();
+    +rimuovi();
+    +modifica();
+    +refreshList();
+}
+
+class FilmMediator {
+    -collezione : Collezione
+    +FilmMediator(collezione)
+    +search();
+    +filtra();
+    +sort();
+    +aggiungi();
+    +rimuovi();
+    +modifica();
+    +refreshList();
+}
+
+class FilmGUI {
+    -mediator : FilmMediator
+    +FilmGUI(mediator)
+}
+
+'Relazioni
+FilmMediator ..> Mediator
+FilmMediator o-- Collezione
+FilmGUI *-- FilmMediator
+
+'posizione grafica
+skinparam linetype ortho
+left to right direction
+Mediator -[hidden]right-> FilmMediator
+Collezione -[hidden]down-> FilmMediator
+
+@enduml

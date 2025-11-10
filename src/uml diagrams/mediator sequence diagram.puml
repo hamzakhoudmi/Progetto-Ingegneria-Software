@@ -1,0 +1,26 @@
+@startuml
+
+participant "Utente" as U
+participant "FilmGUI" as FG
+participant "FilmMediator" as FM
+participant "ConfermaModificaListener" as CML
+participant "Collezione" as C
+participant "Iteratore" as I
+participant "Film" as F
+
+U -> FG : seleziona film
+U -> FG : clicca modifica
+FG -> FM : modifica()
+FM -> C : creaIteratore()
+C -> I : next()
+I -> F : currentItem()
+F -> FM : verifica film.same(f)
+U -> FM : scrive i nuovi campi
+U -> FM : clicca conferma
+FM -> CML : new CML
+CML -> F : chiama i setter
+CML -> FM : refreshList()
+FM -> FG
+FG -> U
+
+@enduml

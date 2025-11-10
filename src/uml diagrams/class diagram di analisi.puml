@@ -12,22 +12,28 @@ class Film {
 }
 
 interface Collezione {
-    +aggiungi()
+    +add()
     +modifica()
-    +rimuovi()
-    +cerca()
-    +ordina()
+    +remove()
+    +search()
+    +sort()
     +salva()
+    +clear()
+    +size()
+    +isEmpty()
 }
 
 class CollezioneSingleton {
-    -lista: List<Film>
-    +aggiungi()
+    -films: List<Film>
+    +add()
     +modifica()
-    +rimuovi()
-    +cerca()
-    +ordina()
+    +remove()
+    +search()
+    +sort()
     +salva()
+    +clear()
+    +size()
+    +isEmpty()
 }
 
 Collezione <|.. CollezioneSingleton

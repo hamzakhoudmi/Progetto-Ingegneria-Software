@@ -1,0 +1,44 @@
+@startuml
+allowmixing
+
+package dominio {
+    interface Collezione
+    class CollezioneSingleton
+    class Film
+    interface Builder
+    interface Iteratore
+}
+package infrastruttura {
+    interface Persister
+}
+package presentazione {
+    package mediator
+    class FilmGUI
+}
+package applicazione {
+    package strategy {
+        package filter
+        package ricerca
+        package sort
+    }
+}
+
+'Relazioni
+FilmGUI *-- mediator
+mediator --> dominio
+applicazione --> dominio
+infrastruttura --> dominio
+CollezioneSingleton ..> Collezione
+CollezioneSingleton *-- Film
+Collezione --> Iteratore
+Builder --> Film
+
+'posizione grafica
+skinparam linetype ortho
+left to right direction
+presentazione -[hidden]down-> dominio
+applicazione -[hidden]down-> dominio
+Collezione -[hidden]left-> CollezioneSingleton
+CollezioneSingleton -[hidden]down-> Film
+
+@enduml

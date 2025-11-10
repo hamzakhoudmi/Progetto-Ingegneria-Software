@@ -12,13 +12,14 @@ interface Builder <<interface>> {
 }
 
 class ConcreteBuilder {
-    -titolo
-    -regista
-    -genere
-    -stato
-    -anno
-    -voto
+    -titolo : String
+    -regista : String
+    -genere : String
+    -stato : Stato
+    -anno : int
+    -voto : int
 
+    +ConcreteBuilder( titolo, regista )
     +genere()
     +stato()
     +anno()

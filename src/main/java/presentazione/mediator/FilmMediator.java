@@ -45,6 +45,7 @@ public class FilmMediator implements Mediator {
                 JOptionPane.showMessageDialog(null, "Criterio non riconosciuto!");
                 return;
         }
+        collezione.sort();  //ordinamento di default
         refreshList( collezione.search() );
     }//cerca
 
@@ -60,6 +61,7 @@ public class FilmMediator implements Mediator {
                 JOptionPane.showMessageDialog(null, "Filtro non riconosciuto!");
                 return;
         }
+        collezione.sort();  //ordinamento di default
         refreshList( collezione.filtra() );
     }//filtra
     public void annullaFiltri() {
@@ -204,6 +206,7 @@ public class FilmMediator implements Mediator {
 
     public void refreshList() {
         listModel.clear();
+        collezione.sort();  //ordinamento di default
         Iteratore<Film> it = collezione.creaIteratore();
         while( it.hasNext() ) {
             it.next();
