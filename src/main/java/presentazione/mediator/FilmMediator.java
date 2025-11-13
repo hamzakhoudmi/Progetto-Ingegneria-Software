@@ -2,10 +2,7 @@ package presentazione.mediator;
 import presentazione.*;
 
 import javax.swing.*;
-import java.util.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
 
 import dominio.*;
 import applicazione.strategy.ricerca.*;

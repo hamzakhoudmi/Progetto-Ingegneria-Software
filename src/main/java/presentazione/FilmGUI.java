@@ -91,7 +91,7 @@ public class FilmGUI extends JFrame {
         }
     }
 
-    // -------- inner listener classes per i bottoni (chiamano il mediator) --------
+    //metto i listeners per i bottoni
     private class AggiungiButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             mediator.aggiungi(); // il mediator aprirà il dialog di aggiunta

@@ -21,6 +21,6 @@ FM -> CML : new CML
 CML -> F : chiama i setter
 CML -> FM : refreshList()
 FM -> FG
-FG -> U
+FG -> U : aggiorna
 
 @enduml

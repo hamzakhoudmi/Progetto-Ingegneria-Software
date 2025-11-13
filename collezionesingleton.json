@@ -1,80 +1,26 @@
 [
   {
     "titolo": "Hunger Games",
-    "regista": "Collins",
-    "genere": "Fantascienza",
-    "stato": "VISTO",
+    "regista": "Ross",
+    "genere": "Fantascenza",
+    "stato": "DA_VEDERE",
     "anno": 2012,
     "voto": 10
+  },
+  {
+    "titolo": "Goodfellas",
+    "regista": "Scorsese",
+    "genere": "Gangster",
+    "stato": "IN_VISIONE",
+    "anno": 1990,
+    "voto": 7
   },
   {
     "titolo": "Le iene",
     "regista": "Tarantino",
     "genere": "Gangster",
-    "stato": "IN_VISIONE",
+    "stato": "VISTO",
     "anno": 1992,
-    "voto": 7
-  },
-  {
-    "titolo": "Hateful Eight",
-    "regista": "Tarantino",
-    "genere": "Storia",
-    "stato": "DA_VEDERE",
-    "anno": 2007,
-    "voto": 0
-  },
-  {
-    "titolo": "Bastardi Senza Gloria",
-    "regista": "Tarantino",
-    "stato": "DA_VEDERE",
-    "anno": 0,
-    "voto": 0
-  },
-  {
-    "titolo": "Batman",
-    "regista": "Nolan",
-    "genere": "Azione",
-    "stato": "IN_VISIONE",
-    "anno": 2007,
-    "voto": 8
-  },
-  {
-    "titolo": "Dune",
-    "regista": "Villenueve",
-    "genere": "Fantascienza",
-    "stato": "VISTO",
-    "anno": 2021,
-    "voto": 9
-  },
-  {
-    "titolo": "Carrie",
-    "regista": "Stephen King",
-    "genere": "Horror",
-    "stato": "VISTO",
-    "anno": 1980,
-    "voto": 9
-  },
-  {
-    "titolo": "Le ali della libertà",
-    "regista": "Stephen King",
-    "stato": "DA_VEDERE",
-    "anno": 0,
-    "voto": 0
-  },
-  {
-    "titolo": "Tenet",
-    "regista": "Nolan",
-    "genere": "Fantascienza",
-    "stato": "VISTO",
-    "anno": 2020,
-    "voto": 7
-  },
-  {
-    "titolo": "Pulp Fiction",
-    "regista": "Tarantino",
-    "genere": "Gangster",
-    "stato": "VISTO",
-    "anno": 1994,
     "voto": 8
   }
 ]

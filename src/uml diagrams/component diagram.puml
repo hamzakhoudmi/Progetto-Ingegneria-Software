@@ -1,0 +1,16 @@
+@startuml
+skinparam componentStyle rectangle
+left to right direction
+
+component GUI <<component>>
+component Mediator <<component>>
+component Collezione <<component>>
+component Strategy <<component>>
+component Json <<component>>
+
+GUI --> Mediator : comunica
+Mediator --> Collezione : coordina
+Collezione --> Strategy : usa
+Collezione --> Json : salva/carica
+
+@enduml
